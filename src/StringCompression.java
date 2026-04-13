@@ -1,9 +1,35 @@
+import java.util.Scanner;
+
 public class StringCompression {
-    
-        // TODO: Read the string
-        // TODO: Iterate through the string to count consecutive characters
-        // TODO: Append char and count to a StringBuilder
-        // TODO: Compare lengths of original vs compressed
-        // TODO: Print the shorter one (or compressed if equal length, depending on strict interpretation. Usually original if compressed is not strictly smaller, but prompt says "if compressed is longer")
-  
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.hasNextLine()) {
+            String s = scanner.nextLine();
+            
+            if (s == null || s.isEmpty()) {
+                System.out.println(s);
+                return;
+            }
+            
+            StringBuilder compressed = new StringBuilder();
+            int countConsecutive = 0;
+            
+            for (int i = 0; i < s.length(); i++) {
+                countConsecutive++;
+                
+                if (i + 1 >= s.length() || s.charAt(i) != s.charAt(i + 1)) {
+                    compressed.append(s.charAt(i));
+                    compressed.append(countConsecutive);
+                    countConsecutive = 0;
+                }
+            }
+            
+            if (compressed.length() < s.length()) {
+                System.out.println(compressed.toString());
+            } else {
+                System.out.println(s);
+            }
+        }
+        scanner.close();
+    }
 }
